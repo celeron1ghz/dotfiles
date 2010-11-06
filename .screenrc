@@ -1,0 +1,21 @@
+escape          t
+autodetach      on
+defencoding     utf8
+encoding UTF-8 UTF-8
+startup_message off
+termcapinfo xterm* ti@:te@ 
+
+defscrollback 3000
+
+bind s  split
+bind k  kill
+bind r  colon 'resize '
+bind x  remove
+bind S  encoding sjis
+
+#hardstatus alwayslastline "[%02c] %-w%{=b bw}%n %t%{-}%+w"
+#hardstatus alwayslastline "[%02c] %-w%{=b bw}%n %t%{-}%+w %=  %?%{=b rw}%1`%{-} [%0`]"
+hardstatus alwayslastline "[%02c] %-w%{=b bw}%n %t%{-}%+w %=  %?%{=b rw}%1`%{-} %0` @ %H"
+
+backtick 0 0 0 /bin/pwd
+
