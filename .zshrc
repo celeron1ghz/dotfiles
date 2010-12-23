@@ -11,9 +11,11 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
+source ~/perl5/perlbrew/etc/bashrc
+
 export LANG=ja_JP.UTF-8
 export EDITOR=/usr/bin/vi
-export MOJO_RELOAD=1
+export PAGER=/usr/bin/less
 
 alias q='exit'
 alias ll='ls -l'
@@ -36,9 +38,10 @@ if [ -f ~/share/zsh/`uname -n`.zsh ]; then
 	source ~/share/zsh/`uname -n`.zsh
 fi
 
-export PAGER=/usr/bin/less
-
-source ~/share/zsh/local_lib.zsh
+#if [ -f ~/.ssh/id_dsa -a "$TERM" != "screen" ]; then
+#	keychain ~/.ssh/id_dsa
+#	source ~/.keychain/$HOST-sh
+#fi
 
 setopt auto_cd
 setopt correct
