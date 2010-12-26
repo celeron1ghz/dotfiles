@@ -2,16 +2,13 @@
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Frame, PageTemplate, NextPageTemplate
-from reportlab.rl_config import defaultPageSize
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 
 pdfmetrics.registerFont(UnicodeCIDFont("HeiseiKakuGo-W5"))
 
-PAGE_HEIGHT=defaultPageSize[1]
-PAGE_WIDTH=defaultPageSize[0]
-
 class MySimpleDocTemplate(SimpleDocTemplate):
     PStyle = ParagraphStyle(name='Normal', fontName="HeiseiKakuGo-W5", fontSize=8, leading=10, borderWidth=1)
+    pageCount = 1
 
     def __init__(self,filename):
         self.leftMargin = 10
@@ -35,8 +32,9 @@ class MySimpleDocTemplate(SimpleDocTemplate):
 
         self.canv.saveState()
         self.canv.setFont(self.PStyle.fontName, self.PStyle.fontSize)
-        self.canv.drawRightString(x, y, "Page:1")
+        self.canv.drawRightString(x, y, "Page:%s" % (self.pageCount) )
         self.canv.restoreState()
+        self.pageCount += 1
         SimpleDocTemplate.handle_frameBegin(self)
 
 def go():
@@ -44,7 +42,7 @@ def go():
     Story = []
 
     for i in range(5):
-        bogustext = (u"\rこんにちわこんにちわ！！") * 50
+        bogustext = (u"\rこんにちわこんにちわ！！") * 100
         Story.append(NextPageTemplate('p1'))
         Story.append(Paragraph(bogustext, doc.PStyle))
         Story.append(Spacer(0, 10))
