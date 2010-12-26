@@ -4,9 +4,8 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Frame, PageTemplate, NextPageTemplate
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 
-pdfmetrics.registerFont(UnicodeCIDFont("HeiseiKakuGo-W5"))
-
 class MySimpleDocTemplate(SimpleDocTemplate):
+    pdfmetrics.registerFont(UnicodeCIDFont("HeiseiKakuGo-W5"))
     PStyle = ParagraphStyle(name='Normal', fontName="HeiseiKakuGo-W5", fontSize=8, leading=10, borderWidth=1)
     pageCount = 1
 
@@ -40,10 +39,10 @@ class MySimpleDocTemplate(SimpleDocTemplate):
 def go():
     doc = MySimpleDocTemplate("reportlab_japanese.pdf")
     Story = []
+    Story.append(NextPageTemplate('p1'))
 
     for i in range(5):
         bogustext = (u"\rこんにちわこんにちわ！！") * 100
-        Story.append(NextPageTemplate('p1'))
         Story.append(Paragraph(bogustext, doc.PStyle))
         Story.append(Spacer(0, 10))
 
