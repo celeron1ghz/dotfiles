@@ -25,15 +25,15 @@ class MySimpleDocTemplate(SimpleDocTemplate):
 
         self.addPageTemplates([
             PageTemplate(id="p1", frames=[
-                Frame(x1=10, y1=10,    width=260, height=405, showBoundary=1, topPadding=15)
-                ,Frame(x1=10, y1=430,  width=260, height=405, showBoundary=1, topPadding=15)
+                 Frame(x1=10,  y1=415, width=260, height=405, showBoundary=1, topPadding=15)
+                ,Frame(x1=270, y1=415, width=260, height=405, showBoundary=1, topPadding=15)
+                ,Frame(x1=10,  y1=10,  width=260, height=405, showBoundary=1, topPadding=15)
                 ,Frame(x1=270, y1=10,  width=260, height=405, showBoundary=1, topPadding=15)
-                ,Frame(x1=270, y1=430, width=260, height=405, showBoundary=1, topPadding=15)
             ])
         ])
 
     def handle_frameBegin(self):
-        x = self.frame.x1 + self.frame.width - self.PStyle.fontSize
+        x = self.frame.x1 + self.frame.width - 15
         y = self.frame.y1 + self.frame.height - self.PStyle.leading
 
         self.canv.saveState()
@@ -46,16 +46,14 @@ class MySimpleDocTemplate(SimpleDocTemplate):
 def go():
     doc = MySimpleDocTemplate("reportlab_japanese.pdf")
     Story = []
-    Story.append(NextPageTemplate('p1'))
-    Story.append(HRFlowable(width='110%'))
 
-    data = yaml.load(open('moge.yaml').read().decode('utf8'))
+    data = yaml.load(open('tweets.yaml').read().decode('utf8'))
 
-    for d in data:
-        tweet = d['text']
+    for d in reversed(data):
+        tweet = d['text'] + "<br />" + d['created_at'] + " " + str(d['id'])
         Story.append(Paragraph(tweet, doc.PStyle))
-        Story.append(Paragraph( d['created_at'] + str(d['id']), doc.PStyle))
         Story.append(HRFlowable(width='110%'))
+        Story.append(NextPageTemplate('p1'))
 
     doc.build(Story)
 
