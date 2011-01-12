@@ -11,6 +11,7 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
+source ~/share/zsh/local_lib.zsh
 source ~/perl5/perlbrew/etc/bashrc
 
 export LANG=ja_JP.UTF-8

@@ -25,10 +25,10 @@ class MySimpleDocTemplate(SimpleDocTemplate):
 
         self.addPageTemplates([
             PageTemplate(id="p1", frames=[
-                 Frame(x1=10,  y1=415, width=260, height=405, showBoundary=1, topPadding=15)
-                ,Frame(x1=270, y1=415, width=260, height=405, showBoundary=1, topPadding=15)
-                ,Frame(x1=10,  y1=10,  width=260, height=405, showBoundary=1, topPadding=15)
-                ,Frame(x1=270, y1=10,  width=260, height=405, showBoundary=1, topPadding=15)
+                 Frame(x1=10,  y1=415, width=255, height=405, showBoundary=1, topPadding=15)
+                ,Frame(x1=265, y1=415, width=255, height=405, showBoundary=1, topPadding=15)
+                ,Frame(x1=10,  y1=10,  width=255, height=405, showBoundary=1, topPadding=15)
+                ,Frame(x1=265, y1=10,  width=255, height=405, showBoundary=1, topPadding=15)
             ])
         ])
 

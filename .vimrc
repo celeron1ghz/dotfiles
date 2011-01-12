@@ -72,6 +72,7 @@ autocmd FileType perl map <F5> :!perl -Ilib % 2>&1 <Enter>
 autocmd FileType perl map <F6> :!perl -Ilib % 2>&1 \| less -r <Enter>
 autocmd FileType perl map <F7> :!perl -Ilib -c %<Enter>
 autocmd FileType changelog runtime ftplugin/changelog.vim
+autocmd FileType python map <F5> :!python %<Enter>
 
 autocmd BufNewFile,BufRead *.t            :set filetype=perl
 autocmd BufNewFile,BufRead *.tt           :set filetype=html
