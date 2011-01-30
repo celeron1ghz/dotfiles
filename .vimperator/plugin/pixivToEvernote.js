@@ -37,7 +37,7 @@ let PLUGIN_INFO =
 
 function pixivToEvernote(){
 
-    if( !AnkPixiv.inPixiv && !AnkPixiv.inMedium )    {
+    if( !AnkPixiv.in.pixiv && !AnkPixiv.in.illustPage )    {
         liberator.echoerr("There is not image page!");
         return;
     }
@@ -89,7 +89,7 @@ function pixivToEvernote(){
 }
 
 function performPixivImageSave()    {
-    if ( !!AnkPixiv.enabled && !AnkPixiv.isDownloaded(AnkPixiv.currentImageId) )  {
+    if ( !!AnkPixiv.in.pixiv && !AnkPixiv.isDownloaded(AnkPixiv.currentImageId) )  {
         AnkPixiv.downloadCurrentImage();
         pixivToEvernote();
     }
