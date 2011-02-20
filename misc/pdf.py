@@ -7,12 +7,12 @@ from reportlab.pdfbase.ttfonts import TTFont
 import sys
 #from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 
+import os
 import yaml
 
 class MySimpleDocTemplate(SimpleDocTemplate):
     #pdfmetrics.registerFont(UnicodeCIDFont("HeiseiKakuGo-W5"))
-    pdfmetrics.registerFont(TTFont('IPA', 'ipag-mona.ttf'))
-
+    pdfmetrics.registerFont(TTFont('IPA', os.environ['HOME'] + '/share/misc/ipag-mona.ttf'))
     PStyle = ParagraphStyle(name='Normal', fontName="IPA", fontSize=6, leading=7, borderWidth=1, wordWrap='CJK')
     #PStyle = ParagraphStyle(name='Normal', fontName="HeiseiKakuGo-W5", fontSize=6, leading=7, borderWidth=1, wordWrap='CJK')
     pageCount = 1
