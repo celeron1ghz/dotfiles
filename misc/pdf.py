@@ -4,6 +4,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Frame, PageTemplate
 from reportlab.platypus.flowables import HRFlowable
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfbase.ttfonts import TTFont
+import sys
 #from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 
 import yaml
@@ -44,10 +45,18 @@ class MySimpleDocTemplate(SimpleDocTemplate):
         SimpleDocTemplate.handle_frameBegin(self)
 
 def go():
-    doc = MySimpleDocTemplate("reportlab_japanese.pdf")
+    args = sys.argv
+
+    if ( len(args) != 3 ):
+        raise Exception("invalid args")
+
+    input = args[1]
+    output = args[2]
+
+    doc = MySimpleDocTemplate(output);
     Story = []
 
-    data = yaml.load(open('tweets.yaml').read().decode('utf8'))
+    data = yaml.load(open(input).read().decode('utf8'))
 
     for d in reversed(data):
         tweet = d['text'] + "<br />" + d['created_at'] + " " + str(d['id'])
