@@ -18,9 +18,9 @@ sub get_scraper {
 
 sub is_limit    {
     my($self,$illust) = @_;
-    my %param = { $illust->{link}->query_form };
+    my %param   = $illust->{link}->query_form;
     my $current = $param{illust_id};
-    my $saved   = 17290804;
+    my $saved   = $self->conf->{illust_id};
     return $saved > $current;
 }
 

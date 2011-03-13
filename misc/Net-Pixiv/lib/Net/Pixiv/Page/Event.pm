@@ -20,7 +20,8 @@ sub get_scraper {
 }
 
 has '+conf' => ( is => 'ro', isa => 'HashRef', default => sub { +{} } );
-sub is_limit { 0 }
+sub is_limit    {0}
+sub save_config { }
 
 1;
 __END__
