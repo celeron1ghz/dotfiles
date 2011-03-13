@@ -1,38 +1,38 @@
 package Net::Pixiv::MultiPage;
 use Any::Moose 'Role';
-use Config::Pit;
 
-sub _moniker {
-    my $self  = shift;
-    my $moniker = ref $self || $self;
-}
-
-sub _load   {
-    my $self = shift;
-    return Config::Pit::pit_get($self->_moniker);
-}
-
-sub _save   {
-    my($self,$conf) = @_;
-    return Config::Pit::pit_set($self->_moniker, data => $conf);
-}
-
-has conf =>
-    is      => 'rw',
-    isa     => 'HashRef',
-    default => sub {
-        my $self = shift;
-        return $self->_load;
-    };
-
-sub save_config {
-    my $self = shift;
-    $self->_save($self->conf);
-}
-
-requires 'get_url';
-requires 'get_scraper';
 requires 'is_limit';
+
+sub scrape  {
+    my($self,$type,$args) = @_;
+    my $page = $self->pages->{$type} or die "No such page '$type'";
+    my $sc   = $page->get_scraper;
+    my $url  = URI->new($page->get_url($args));
+
+    my @illusts;
+
+    OUTER: for ( my $cnt = 1 ;; $cnt++ )   {
+        my $orig = { $url->query_form };
+        $orig->{p} = $cnt;
+        $url->query_form(%$orig);
+
+        warn "fetching $url ...";
+
+        my $res = $self->ua->get($url);
+        my $ret = $sc->scrape($res);
+
+        my(undef,$illusts) = each %$ret;
+
+        $illusts = [ grep { keys %$_ } @$illusts ]; # remove empty hash
+
+        last unless $illusts;
+        last unless @$illusts;
+
+        push @illusts, grep { !$page->is_limit($_) } @$illusts;
+    }
+
+    return @illusts;
+}
 
 1;
 __END__

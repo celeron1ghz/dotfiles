@@ -3,6 +3,7 @@ use Any::Moose;
 use Web::Scraper;
 
 with 'Net::Pixiv::MultiPage';
+with 'Net::Pixiv::Page';
 
 sub get_url {
     my($self,$args) = @_;
