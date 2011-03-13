@@ -2,7 +2,7 @@ package Net::Pixiv::Page::Event;
 use Any::Moose;
 use Web::Scraper;
 
-with 'Net::Pixiv::Page';
+with 'Net::Pixiv::MultiPage';
 
 sub get_url {
     my($self,$args) = @_;

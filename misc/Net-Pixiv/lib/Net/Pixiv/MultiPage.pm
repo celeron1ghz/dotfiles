@@ -1,4 +1,4 @@
-package Net::Pixiv::Page;
+package Net::Pixiv::MultiPage;
 use Any::Moose 'Role';
 use Config::Pit;
 
@@ -39,7 +39,7 @@ __END__
 
 =head1 NAME
 
-Net::Pixiv::Page -
+Net::Pixiv::NultiPage -
 
 =head1 METHOD
 

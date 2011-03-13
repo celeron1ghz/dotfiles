@@ -1,7 +1,7 @@
 BEGIN{
     package Net::Pixiv::Page::Moge;
     use Any::Moose;
-    with 'Net::Pixiv::Page';
+    with 'Net::Pixiv::MultiPage';
 
     sub get_url{}
     sub get_scraper{}

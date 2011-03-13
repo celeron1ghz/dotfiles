@@ -2,7 +2,7 @@ package Net::Pixiv::Page::BookmarkNewIllust;
 use Any::Moose;
 use Web::Scraper;
 
-with 'Net::Pixiv::Page';
+with 'Net::Pixiv::MultiPage';
 
 sub get_url { 'http://www.pixiv.net/bookmark_new_illust.php' }
 
