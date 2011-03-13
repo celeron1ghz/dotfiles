@@ -10,7 +10,7 @@ BEGIN{
 
 use strict;
 use Config::Pit qw/pit_get pit_set/;
-use Test::More tests => 6;
+use Test::More tests => 8;
 
 my $p = Net::Pixiv::Page::Moge->new;
 my $expected = { moge => 'fuga' };
