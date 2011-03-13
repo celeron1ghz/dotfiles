@@ -13,6 +13,9 @@ map <A-d>       :mr alc
 map <M-d>       :mr alc 
 map <M-c>       :tabopen http://search.cpan.org/search?mode=all&query=
 map <C-g>       :tabopen google 
+map ,;    :moveComiketPage<cr>
+map ,:    :pixivToChecklist<cr>
+
 map <silent> v  :viewsource<cr>
 
 set titlestring=Firefox

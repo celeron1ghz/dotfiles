@@ -2,7 +2,7 @@
 
 function pixivToChecklist(){
 
-    if( !AnkPixiv.inPixiv && !AnkPixiv.inMedium )    {
+    if ( !AnkPixiv.in.pixiv && !AnkPixiv.in.illustPage )    {
         liberator.echoerr("There is not image page!");
         return;
     }
@@ -55,7 +55,7 @@ liberator.modules.commands.addUserCommand(
     "Post current pixiv page's big image to evernote",
     function(){
         var id  = AnkPixiv.info.member.id;
-        var url = "http://www.pixiv.net/member_event.php?id=" + id + "&event_id=805";
+        var url = "http://www.pixiv.net/member_event.php?id=" + id + "&event_id=907";
         content.location.href = url;
     },
     {},
