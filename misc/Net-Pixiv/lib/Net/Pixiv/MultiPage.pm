@@ -4,11 +4,9 @@ use Any::Moose 'Role';
 requires 'is_limit';
 
 sub scrape  {
-    my($self,$type,$args) = @_;
-    my $page = $self->pages->{$type} or die "No such page '$type'";
-    my $sc   = $page->get_scraper;
-    my $url  = URI->new($page->get_url($args));
-
+    my($self,$c,$args) = @_;
+    my $sc   = $self->get_scraper;
+    my $url  = URI->new($self->get_url($args));
     my @illusts;
 
     OUTER: for ( my $cnt = 1 ;; $cnt++ )   {
@@ -18,7 +16,7 @@ sub scrape  {
 
         warn "fetching $url ...";
 
-        my $res = $self->ua->get($url);
+        my $res = $c->ua->get($url);
         my $ret = $sc->scrape($res);
 
         my(undef,$illusts) = each %$ret;
@@ -28,7 +26,7 @@ sub scrape  {
         last unless $illusts;
         last unless @$illusts;
 
-        push @illusts, grep { !$page->is_limit($_) } @$illusts;
+        push @illusts, grep { !$self->is_limit($_) } @$illusts;
     }
 
     return @illusts;
@@ -39,7 +37,7 @@ __END__
 
 =head1 NAME
 
-Net::Pixiv::NultiPage -
+Net::Pixiv::MultiPage -
 
 =head1 METHOD
 

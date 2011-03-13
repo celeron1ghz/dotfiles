@@ -38,32 +38,7 @@ sub login      {
 sub scrape  {
     my($self,$type,$args) = @_;
     my $page = $self->pages->{$type} or die "No such page '$type'";
-    my $sc   = $page->get_scraper;
-    my $url  = URI->new($page->get_url($args));
-
-    my @illusts;
-
-    OUTER: for ( my $cnt = 1 ;; $cnt++ )   {
-        my $orig = { $url->query_form };
-        $orig->{p} = $cnt;
-        $url->query_form(%$orig);
-
-        warn "fetching $url ...";
-
-        my $res = $self->ua->get($url);
-        my $ret = $sc->scrape($res);
-
-        my(undef,$illusts) = each %$ret;
-
-        $illusts = [ grep { keys %$_ } @$illusts ]; # remove empty hash
-
-        last unless $illusts;
-        last unless @$illusts;
-
-        push @illusts, grep { !$page->is_limit($_) } @$illusts;
-    }
-
-    return @illusts;
+    $page->scrape($self,$args);
 }
 
 1;
