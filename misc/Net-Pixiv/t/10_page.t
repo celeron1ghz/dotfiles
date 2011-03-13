@@ -13,19 +13,38 @@ use Config::Pit qw/pit_get pit_set/;
 use Test::More tests => 6;
 
 my $p = Net::Pixiv::Page::Moge->new;
+my $expected = { moge => 'fuga' };
 
-ok $p, 'instance created';
 is $p->_moniker, 'Net::Pixiv::Page::Moge', 'moniker ok';
 
 
-is_deeply $p->_load, {}, 'nothing on first load';
-$p->_save({ moge => 'fuga' });
+# raw function tests...
+is_deeply $p->_load, {}, 'nothing value on first load';
 
 
-my $expected = { moge => 'fuga' };
-is_deeply $p->_load,                         , $expected, 'save can work';
-is_deeply pit_get('Net::Pixiv::Page::Moge'),   $expected, 'save can work';
+$p->_save($expected);
+is_deeply $p->_load,                         $expected, 'save can work';
+is_deeply pit_get('Net::Pixiv::Page::Moge'), $expected, 'save can work';
 
 
-$p->_save({});
-is_deeply $p->_load, {}, 'cleanup ok';
+# public interface tests...
+$p = Net::Pixiv::Page::Moge->new;
+is_deeply $p->conf, $expected, 'load config ok';
+
+
+$p->conf({});
+$p = Net::Pixiv::Page::Moge->new;
+is_deeply $p->conf, $expected, 'save not running';
+
+
+$expected = { piyo => 'moga' };
+$p->conf($expected);
+$p->save_config;
+$p = Net::Pixiv::Page::Moge->new;
+is_deeply $p->conf, $expected, 'save can work';
+
+
+$p->conf({});
+$p->save_config;
+$p = Net::Pixiv::Page::Moge->new;
+is_deeply $p->conf, {}, 'cleanup ok';

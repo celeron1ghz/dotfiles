@@ -25,6 +25,11 @@ has conf =>
         return $self->_load;
     };
 
+sub save_config {
+    my $self = shift;
+    $self->_save($self->conf);
+}
+
 requires 'get_url';
 requires 'get_scraper';
 requires 'is_limit';
