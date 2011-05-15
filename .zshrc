@@ -11,7 +11,6 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
-source ~/share/zsh/local_lib.zsh
 source ~/perl5/perlbrew/etc/bashrc
 
 export LANG=ja_JP.UTF-8
@@ -26,8 +25,6 @@ alias cls='clear'
 alias ss='svn st'
 alias sd='svn diff'
 alias dl='svn diff | less -r'
-alias c="$EDITOR ~/memo/ChangeLog"
-alias ci="svn ci -m 'updated changelog' ~/memo/ChangeLog"
 alias gd='git diff'
 alias gs='git status'
 
