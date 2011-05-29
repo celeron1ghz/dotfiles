@@ -32,8 +32,8 @@ alias p='clear; prove -Ilib -r'
 alias pl='clear; prove -Ilib -r 2>&1 | less '
 alias clean_swap="rm $HOME/.swap/*"
 
-if [ -f ~/share/zsh/`uname -n`.zsh ]; then
-	source ~/share/zsh/`uname -n`.zsh
+if [ -f ~/dotfiles/zsh/`uname -n`.zsh ]; then
+	source ~/dotfiles/zsh/`uname -n`.zsh
 fi
 
 #if [ -f ~/.ssh/id_dsa -a "$TERM" != "screen" ]; then
