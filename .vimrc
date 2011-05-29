@@ -68,9 +68,9 @@ map <silent> ,l    :ls<cr>
 
 autocmd FileType yaml map <F5> :!plagger -c % 2>&1 <Enter>
 autocmd FileType yaml map <F6> :!plagger -c % 2>&1 \| less -r <Enter>
-autocmd FileType perl map <F5> :!perl -Ilib % 2>&1 <Enter>
-autocmd FileType perl map <F6> :!perl -Ilib % 2>&1 \| less -r <Enter>
-autocmd FileType perl map <F7> :!perl -Ilib -c %<Enter>
+autocmd FileType perl map <F5> :!source ~/.zshrc; perl -Ilib % 2>&1 <Enter>
+autocmd FileType perl map <F6> :!source ~/.zshrc; perl -Ilib % 2>&1 \| less -r <Enter>
+autocmd FileType perl map <F7> :!source ~/.zshrc; perl -Ilib -c %<Enter>
 autocmd FileType changelog runtime ftplugin/changelog.vim
 autocmd FileType python map <F5> :!python %<Enter>
 
