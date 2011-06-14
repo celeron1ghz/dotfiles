@@ -19,7 +19,7 @@ map ,:    :pixivToChecklist<cr>
 map <silent> v  :viewsource<cr>
 
 set titlestring=Vimperator
-set wildmode=longest,full
+set wildmode=full
 set complete=l
 set! ui.key.generalAccessKey=0
 
