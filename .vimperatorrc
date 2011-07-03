@@ -1,4 +1,4 @@
-set guioptions=rbn
+set gui=none
 
 map h H
 map l L
@@ -18,8 +18,8 @@ map ,:    :pixivToChecklist<cr>
 
 map <silent> v  :viewsource<cr>
 
-set titlestring=Firefox
-set wildoptions=auto
+set titlestring=Vimperator
+set wildmode=full
 set complete=l
 set! ui.key.generalAccessKey=0
 
@@ -40,25 +40,21 @@ liberator.globalVariables.refcontrol = {
 };
 
 liberator.globalVariables.plugin_loader_plugins = <>
-	_libly
+    _libly
     _smooziee
-	subscldr
-	feedSomeKeys_2
+    subscldr
+    feedSomeKeys_3
     matanico
     direct_bookmark
-    commandBookmarklet
     multi_requester
-    char-hints-mod2
     appendAnchor
     refcontrol
     loginManager
-    reading
+    tombloo
 </>.toString().split(/\s+/).filter(function(n) n);
-
-//liberator.loadScript("chrome://ankpixiv/content/ankutils.js",   {__proto__: this});
 EOT
 
-map ,@ :pixivToEvernote<cr>
+"map ,@ :pixivToEvernote<cr>
 autocmd DOMLoad,LocationChange 'www\.pixiv\.net/member_illust\.php\?mode=medium' :performPixivImageSave<cr>
 
 autocmd LocationChange .* :fmapc
