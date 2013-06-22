@@ -2,6 +2,7 @@ package Net::Pixiv::Page::BookmarkNewIllust;
 use Any::Moose;
 use Web::Scraper;
 
+with 'Net::Pixiv::MultiPage';
 with 'Net::Pixiv::Page';
 
 sub get_url { 'http://www.pixiv.net/bookmark_new_illust.php' }
@@ -18,9 +19,9 @@ sub get_scraper {
 
 sub is_limit    {
     my($self,$illust) = @_;
-    my %param = { $illust->{link}->query_form };
+    my %param   = $illust->{link}->query_form;
     my $current = $param{illust_id};
-    my $saved   = 17290804;
+    my $saved   = $self->conf->{illust_id};
     return $saved > $current;
 }
 

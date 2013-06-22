@@ -32,7 +32,7 @@ sub save_config {
 
 requires 'get_url';
 requires 'get_scraper';
-requires 'is_limit';
+requires 'scrape';
 
 1;
 __END__

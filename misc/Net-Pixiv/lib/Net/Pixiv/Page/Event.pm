@@ -2,6 +2,7 @@ package Net::Pixiv::Page::Event;
 use Any::Moose;
 use Web::Scraper;
 
+with 'Net::Pixiv::MultiPage';
 with 'Net::Pixiv::Page';
 
 sub get_url {
@@ -20,7 +21,8 @@ sub get_scraper {
 }
 
 has '+conf' => ( is => 'ro', isa => 'HashRef', default => sub { +{} } );
-sub is_limit { 0 }
+sub is_limit    {0}
+sub save_config { }
 
 1;
 __END__
