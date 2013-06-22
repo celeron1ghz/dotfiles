@@ -76,6 +76,7 @@ autocmd FileType python map <F5> :!python %<Enter>
 
 autocmd BufNewFile,BufRead *.t            :set filetype=perl
 autocmd BufNewFile,BufRead *.tt           :set filetype=html
+autocmd BufNewFile,BufRead *.tx           :set filetype=html
 autocmd BufNewFile,BufRead *.epl          :set filetype=html
 autocmd BufNewFile,BufRead *.cgi          :set filetype=perl
 autocmd BufNewFile,BufRead *.crontab      :set filetype=crontab

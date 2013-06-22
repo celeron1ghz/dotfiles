@@ -26,6 +26,7 @@ set! ui.key.generalAccessKey=0
 style chrome://* .tabs-newtab-button { display: none;}
 
 let g:plugin_loader_roots = '~/.vimperator/github/'
+let g:plugin_loader_plugins = '_libly,_smooziee,feedSomeKeys_3,direct_bookmark,multi_requester,refcontrol,loginManager,tombloo'
 let g:direct_sbm_use_services_by_post = 'h'
 let g:direct_sbm_use_services_by_tag  = 'h'
 let g:refcontrol_enabled = 'true'
@@ -38,20 +39,6 @@ liberator.globalVariables.refcontrol = {
   'fc2.com'    : '',
   'pixiv.net'  : '@NORMAL',
 };
-
-liberator.globalVariables.plugin_loader_plugins = <>
-    _libly
-    _smooziee
-    subscldr
-    feedSomeKeys_3
-    matanico
-    direct_bookmark
-    multi_requester
-    appendAnchor
-    refcontrol
-    loginManager
-    tombloo
-</>.toString().split(/\s+/).filter(function(n) n);
 EOT
 
 "map ,@ :pixivToEvernote<cr>
