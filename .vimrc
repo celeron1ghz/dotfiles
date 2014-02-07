@@ -40,7 +40,9 @@ if has("syntax")
         highlight LowerMatch term=underline ctermbg=blue guibg=blue
         syntax match EntryMatch '^	\*.*' display containedin=ALL
         highlight EntryMatch term=underline ctermbg=blue guibg=blue
-		" check for matching .*?
+        syntax match AngularJSMatch '{{.*}}' display containedin=ALL
+        highlight AngularJSMatch term=underline ctermbg=blue guibg=blue
+		" check for matching .*? {{aaa}}
     endf
 
     augroup invisible
@@ -77,6 +79,7 @@ autocmd FileType python map <F5> :!python %<Enter>
 autocmd BufNewFile,BufRead *.t            :set filetype=perl
 autocmd BufNewFile,BufRead *.tt           :set filetype=html
 autocmd BufNewFile,BufRead *.tx           :set filetype=html
+autocmd BufNewFile,BufRead *.ep           :set filetype=html
 autocmd BufNewFile,BufRead *.epl          :set filetype=html
 autocmd BufNewFile,BufRead *.cgi          :set filetype=perl
 autocmd BufNewFile,BufRead *.crontab      :set filetype=crontab
