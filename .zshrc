@@ -32,6 +32,7 @@ alias gs='git status'
 alias p='clear; prove -Ilib -r'
 alias pl='clear; prove -Ilib -r 2>&1 | less '
 alias clean_swap="rm $HOME/.swap/*"
+alias sv="supervisorctl"
 
 if [ -f ~/dotfiles/zsh/`uname -n`.zsh ]; then
 	source ~/dotfiles/zsh/`uname -n`.zsh
