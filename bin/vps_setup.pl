@@ -68,7 +68,7 @@ sub templates   {
 <<EOT;
 server {
     listen       80;
-    server_name  $param->{conf}->{id}.camelon.info;
+    server_name  $param->{conf}->{domain}.camelon.info;
 
     location / {
         proxy_pass http://localhost:$param->{conf}->{port};
@@ -108,8 +108,9 @@ sub run {
 
             my $id = $data->{id}   or die "id not specified in $rcfile";
             my $port = $data->{port} or die "port not specified in $rcfile";
+            my $domain = $data->{domain} || $id;
 
-            warn "processing $dist (id=$id,port=$port)";
+            warn "processing $dist (id=$id,port=$port,domain=$domain)";
 
             for my $clazz (@assets) {
                 my $param = {
