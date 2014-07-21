@@ -41,12 +41,12 @@ sub templates   {
 
 <<EOT;
 #!/usr/bin/env bash
-exec carton exec -- \
-    plackup \
-        -Ilib \
-        -s Starlet \
-        -E production \
-        --host 127.0.0.1 \
+exec carton exec -- \\
+    plackup \\
+        -Ilib \\
+        -s Starlet \\
+        -E production \\
+        --host 127.0.0.1 \\
         --port $param->{conf}->{port}
 EOT
 }
