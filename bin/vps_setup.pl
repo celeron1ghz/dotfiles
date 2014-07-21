@@ -20,7 +20,7 @@ numprocs=1
 autostart=true
 autorestart=true
 redirect_stderr=true
-stdout_logfile=$param->{dist_dir}/log/stdout.log
+stdout_logfile=$param->{dist_dir}/log/$param->{conf}->{id}.log
 stdout_logfile_maxbytes=1MB
 stdout_logfile_backups=10
 EOT
