@@ -33,7 +33,7 @@ sub executable { 1 }
 
 sub output_path {
     my($self,$param) = @_;
-    $param->{parent}->basedir->subdir("runner")->file(sprintf "%s.runner.ini", $param->{conf}->{id});
+    $param->{parent}->basedir->subdir("runner")->file(sprintf "%s.runner.sh", $param->{conf}->{id});
 }
 
 sub templates   {
