@@ -108,7 +108,8 @@ sub run {
 
             my $id = $data->{id}   or die "id not specified in $rcfile";
             my $port = $data->{port} or die "port not specified in $rcfile";
-            my $domain = $data->{domain} || $id;
+            $data->{domain} ||= $id;
+            my $domain = $data->{domain};
 
             warn "processing $dist (id=$id,port=$port,domain=$domain)";
 
