@@ -33,7 +33,7 @@ sub executable { 1 }
 
 sub output_path {
     my($self,$param) = @_;
-    $param->{dist_dir}->file(sprintf "%s.runner.sh", $param->{conf}->{id});
+    $param->{parent}->basedir->subdir("runner")->file(sprintf "%s.runner.ini", $param->{conf}->{id});
 }
 
 sub templates   {
@@ -41,6 +41,7 @@ sub templates   {
 
 <<EOT;
 #!/usr/bin/env bash
+cd $param->{dist_dir}
 exec carton exec -- \\
     plackup \\
         -Ilib \\
