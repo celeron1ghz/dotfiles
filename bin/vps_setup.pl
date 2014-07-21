@@ -13,7 +13,7 @@ sub templates   {
 
 <<EOT;
 [program:$param->{conf}->{id}]
-command=$param->{dist_dir}/server/$param->{conf}->{id}.runner.sh
+command=$param->{dist_dir}/$param->{conf}->{id}.runner.sh
 directory=$param->{dist_dir}
 numprocs=1
 autostart=true
