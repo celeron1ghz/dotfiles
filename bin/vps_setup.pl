@@ -105,10 +105,10 @@ sub run {
         if (-e $rcfile) {
             my $data = YAML::LoadFile($rcfile);
 
-            $data->{id}   or die "id not specified in $rcfile";
-            $data->{port} or die "port not specified in $rcfile";
+            my $id = $data->{id}   or die "id not specified in $rcfile";
+            my $port = $data->{port} or die "port not specified in $rcfile";
 
-            warn "processing $dist...";
+            warn "processing $dist (id=$id,port=$port)";
 
             for my $clazz (@assets) {
                 my $param = {
