@@ -13,6 +13,7 @@ SAVEHIST=100000
 
 source ~/perl5/perlbrew/etc/bashrc
 
+export PATH=$PATH:$HOME/dotfiles/bin
 export LANG=ja_JP.UTF-8
 export EDITOR=/usr/bin/vi
 export PAGER=/usr/bin/less
