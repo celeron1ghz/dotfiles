@@ -1,7 +1,8 @@
 #!/usr/bin/env perl
-
 package VPS::Setup::Template::Supervisor;
 use strict;
+
+sub executable { 0 }
 
 sub output_path {
     my($self,$param) = @_;
@@ -28,6 +29,8 @@ EOT
 package VPS::Setup::Template::RunnerShellFile;
 use strict;
 
+sub executable { 1 }
+
 sub output_path {
     my($self,$param) = @_;
     $param->{dist_dir}->file(sprintf "%s.runner.sh", $param->{conf}->{id});
@@ -50,6 +53,8 @@ EOT
 
 package VPS::Setup::Template::Nginx;
 use strict;
+
+sub executable { 0 }
 
 sub output_path {
     my($self,$param) = @_;
@@ -116,7 +121,7 @@ sub run {
                 my $template = $clazz->templates($param);
 
                 if (-e $path)   {
-                    warn "  EXIST $path";
+                    warn "  EXIST  $path";
                 }
                 else    {
                     warn "  CREATE $path";
@@ -126,6 +131,10 @@ sub run {
                     my $fh = $file->openw or die "$file: $!";
                     print $fh $template;
                     close $fh;
+
+                    if ($clazz->executable) {
+                        chmod 0755, $file;
+                    }
                 }
             }
         }
