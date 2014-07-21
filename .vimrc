@@ -77,6 +77,7 @@ autocmd FileType changelog runtime ftplugin/changelog.vim
 autocmd FileType python map <F5> :!python %<Enter>
 
 autocmd BufNewFile,BufRead *.t            :set filetype=perl
+autocmd BufNewFile,BufRead *.psgi         :set filetype=perl
 autocmd BufNewFile,BufRead *.tt           :set filetype=html
 autocmd BufNewFile,BufRead *.tx           :set filetype=html
 autocmd BufNewFile,BufRead *.ep           :set filetype=html
