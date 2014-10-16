@@ -5,13 +5,14 @@ use File::Spec;
 use Cwd;
 use Time::Piece;
 use Path::Tiny;
+use File::Basename;
 
 sub generate_env_exec   {
     my $PROJECT_HOME = getcwd;
     my $ENV_EXEC     = File::Spec->catfile($PROJECT_HOME, 'cron', 'env-exec');
 
     #my $env  = $ENV{PERLBREW_PATH};
-    my $env  = `which perl`; chomp $env;
+    my $env  = `which perl`; chomp $env; $env = dirname($env);
     my $path = sprintf "local/bin:%s:\$PATH", $env;
     my $user = `whoami`; chomp $user;
 
