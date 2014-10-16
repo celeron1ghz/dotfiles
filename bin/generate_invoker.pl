@@ -7,20 +7,12 @@ use Time::Piece;
 use Path::Tiny;
 
 sub generate_env_exec   {
-    my $PROJECT_HOME = Cwd::realpath($FindBin::Bin);
+    my $PROJECT_HOME = getcwd;
     my $ENV_EXEC     = File::Spec->catfile($PROJECT_HOME, 'cron', 'env-exec');
 
-    my $perlenv = "$ENV{HOME}/.perlbrew/init";
-    my %init_value;
-    {
-        local $/;
-        open my $fh, $perlenv or die "$!: $perlenv";
-        my $content = <$fh>;
-        close $fh;
-        %init_value = $content =~ /export (\w+)="(.*?)"/g;
-    }
-
-    my $path = sprintf "local/bin:%s:\$PATH", $init_value{PERLBREW_PATH};
+    #my $env  = $ENV{PERLBREW_PATH};
+    my $env  = `which perl`; chomp $env;
+    my $path = sprintf "local/bin:%s:\$PATH", $env;
     my $user = `whoami`; chomp $user;
 
     my $ENV_EXEC_CONTENT = <<ENV_EXEC;
@@ -37,7 +29,11 @@ export PLACK_ENV=production
 exec "\$@"
 ENV_EXEC
 
-    my $file = path($ENV_EXEC);
-    $file->spew($ENV_EXEC_CONTENT);
-    $file->chmod(0755);
+    open my $fh, '>', $ENV_EXEC or die "$ENV_EXEC: $!";
+    print $fh $ENV_EXEC_CONTENT;
+    close $fh;
+
+    chmod 0755, $ENV_EXEC;
 }
+
+generate_env_exec();
