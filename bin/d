@@ -1,0 +1,42 @@
+#!/usr/bin/env perl
+use strict;
+
+my $commands = sprintf "{%s}", join "\|", grep { s/^cmd_// } keys %DockerUtil::;
+my $cmd      = shift or die "Usage: $0 $commands";
+my $command  = "cmd_$cmd";
+my $meth     = DockerUtil->can($command) or die "No such command '$cmd'";
+$meth->(@ARGV);
+
+package DockerUtil;
+use strict;
+
+sub cmd_rmall {
+    system 'docker rm $(docker ps -a -q)';
+}
+
+sub cmd_rmiall {
+    system q!docker rmi $(docker images | awk '/^<none>/ { print $3 }')!;
+}
+
+sub cmd_kill {
+    my $ret = `docker ps | peco --initial-index 1 --prompt "SELECT KILL CONTAINER>"`;
+    my($id) = split /\s+/, $ret;
+    system "docker kill $id";
+}
+
+sub cmd_rund {
+    my $ret = `docker images | peco --initial-index 1 --prompt "SELECT RUN CONTAINER>"`;
+    my($id,$tag) = split /\s+/, $ret;
+    my $name = "$id:$tag";
+
+    warn "running container $name";
+    system "docker run -d -P $name";
+}
+
+sub cmd_bash {
+    my $ret = `docker ps | peco --initial-index 1 --prompt "SELECT ATTACH CONTAINER>"`;
+    my($id,$image) = split /\s+/, $ret;
+
+    warn "attach with bash $image";
+    system "docker exec -it $id bash";
+}
