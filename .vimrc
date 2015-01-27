@@ -1,5 +1,52 @@
+" config from http://qiita.com/Cside_/items/3d186671b361672f1e51
 syntax on
 
+" plugin settings
+filetype plugin on
+
+set rtp+=~/.vim/vundle/
+call vundle#rc('~/.vim/bundle')
+
+Bundle 'petdance/vim-perl'
+Bundle 'hotchpotch/perldoc-vim'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
+Bundle 'thinca/vim-quickrun'
+
+" plugin settings
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+
+"let g:neocomplcache_ctags_arguments_list = {
+"  \ 'perl' : '-R -h ".pm"'
+"  \ }
+
+let g:neocomplcache_snippets_dir = "~/.vim/snippets"
+
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default'    : '',
+    \ 'perl'       : $HOME . '/.vim/dict/perl.dict'
+    \ }
+
+if !exists('g:neocomplcache_keyword_patterns')
+  let g:neocomplcache_keyword_patterns = {}
+endif
+
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+if g:neocomplcache_enable_at_startup
+  imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_jump_or_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+endif
+
+" editor setting
 set number
 set hlsearch
 set nobackup
