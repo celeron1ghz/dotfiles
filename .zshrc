@@ -5,7 +5,7 @@ bindkey -e emacs
 
 DEF="$reset_color"
 PROMPT="
-%{$fg[green]%}%/%{$DEF%} on %{$fg[cyan]%}%M%{$DEF%} %{$fg[magenta]%}(local)%{$DEF%}
+%{$fg[green]%}%/%{$DEF%} on %{$fg[cyan]%}%M%{$DEF%}
 %{$fg[yellow]%}%n%{$DEF%} %# "
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
@@ -33,6 +33,8 @@ alias p='clear; prove -Ilib -r'
 alias pl='clear; prove -Ilib -r 2>&1 | less '
 alias clean_swap="rm $HOME/.swap/*"
 alias sv="supervisorctl"
+
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
 if [ -f ~/dotfiles/zsh/`uname -n`.zsh ]; then
 	source ~/dotfiles/zsh/`uname -n`.zsh
