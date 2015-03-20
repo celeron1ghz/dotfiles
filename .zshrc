@@ -12,6 +12,7 @@ HISTSIZE=100000
 SAVEHIST=100000
 
 source ~/perl5/perlbrew/etc/bashrc
+source ~/dotfiles/zsh_command/*.zsh
 
 export PATH=$PATH:$HOME/dotfiles/bin
 export LANG=ja_JP.UTF-8
