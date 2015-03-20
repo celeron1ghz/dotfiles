@@ -17,12 +17,16 @@ find(sub{
 
     unless ( -e $target )   {
 	    symlink $from => $target or die "fail to make $target: $!";
-
 	    print "aliased $from -> $target\n";
     }
 }, '.');
 
-
+## aliasing normal files
 my %alias = (
     "$PWD/tmux/mytheme.sh" => "$HOME/tmux-powerline/themes/mytheme.sh"
 );
+
+while ( my($from,$target) = each %alias )   {
+    symlink $from => $target or die "fail to make $target: $!";
+    print "aliased $from -> $target\n";
+}
