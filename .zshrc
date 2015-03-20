@@ -18,27 +18,29 @@ export LANG=ja_JP.UTF-8
 export EDITOR=/usr/bin/vi
 export PAGER=/usr/bin/less
 
+case "${OSTYPE}" in
+  darwin*)
+    alias ls="ls -G"
+    alias ll="ls -lG"
+    alias la="ls -laG"
+    ;;
+  linux*)
+    alias ls='ls --color'
+    alias ll='ls -l --color'
+    alias la='ls -la --color'
+    ;;
+esac
+
 alias q='exit'
-alias ll='ls -l'
-alias la='ls -a'
-alias lla='ls -la'
 alias cls='clear'
-alias ss='svn st'
-alias sd='svn diff'
-alias dl='svn diff | less -r'
 alias gd='git diff'
 alias gs='git status'
 
 alias p='clear; prove -Ilib -r'
 alias pl='clear; prove -Ilib -r 2>&1 | less '
-alias clean_swap="rm $HOME/.swap/*"
 alias sv="supervisorctl"
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-
-if [ -f ~/dotfiles/zsh/`uname -n`.zsh ]; then
-	source ~/dotfiles/zsh/`uname -n`.zsh
-fi
 
 #if [ -f ~/.ssh/id_dsa -a "$TERM" != "screen" ]; then
 #	keychain ~/.ssh/id_dsa
