@@ -12,7 +12,8 @@ HISTSIZE=100000
 SAVEHIST=100000
 
 source ~/perl5/perlbrew/etc/bashrc
-source ~/dotfiles/zsh_command/*.zsh
+source ~/dotfiles/zsh_command/open_pm_with_vim.zsh
+source ~/dotfiles/zsh_command/peco_select_history.zsh
 
 export PATH=$PATH:$HOME/dotfiles/bin
 export LANG=ja_JP.UTF-8
