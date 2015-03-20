@@ -5,6 +5,7 @@ use File::Find;
 my $HOME = $ENV{HOME};
 my $PWD  = $ENV{PWD};
 
+## aliasing dotfiles
 find(sub{
 	next if $_ eq '.';
 	next if $_ eq '..';
@@ -20,3 +21,8 @@ find(sub{
 	    print "aliased $from -> $target\n";
     }
 }, '.');
+
+
+my %alias = (
+    "$PWD/tmux/mytheme.sh" => "$HOME/tmux-powerline/themes/mytheme.sh"
+);
