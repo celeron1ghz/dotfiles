@@ -27,6 +27,11 @@ my %alias = (
 );
 
 while ( my($from,$target) = each %alias )   {
+    if (-l $target) {
+        warn "symlink $target already exist";
+        next;
+    }
+
     symlink $from => $target or die "fail to make $target: $!";
     print "aliased $from -> $target\n";
 }
