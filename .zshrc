@@ -14,6 +14,9 @@ SAVEHIST=100000
 source ~/perl5/perlbrew/etc/bashrc
 source ~/dotfiles/zsh_command/open_pm_with_vim.zsh
 source ~/dotfiles/zsh_command/peco_select_history.zsh
+source /usr/local/share/zsh/site-functions/_aws
+eval "$(direnv hook zsh)"
+direnv allow
 
 export PATH=$PATH:$HOME/dotfiles/bin
 export LANG=ja_JP.UTF-8
@@ -38,9 +41,17 @@ alias cls='clear'
 alias gd='git diff'
 alias gs='git status'
 
-alias p='clear; prove -Ilib -r'
-alias pl='clear; prove -Ilib -r 2>&1 | less '
+alias di='docker images'
+alias dp='docker ps -a'
+alias dl='docker logs'
+
+alias ppr='clear; carton exec prove'
+alias ppl='clear; carton exec perl -Ilib'
 alias sv="supervisorctl"
+
+alias dl="docker ps --format='{{ .ID }} {{ .Names }} (from {{ .Image }})' | peco --prompt 'docker logs> ' | awk '{print \$1}' | xargs docker logs"
+alias dk="docker ps --format='{{ .ID }} {{ .Names }} (from {{ .Image }})' | peco --prompt 'docker kill> ' | awk '{print \$1}' | xargs docker kill"
+alias dr="docker ps --format='{{ .ID }} {{ .Names }} (from {{ .Image }})' | peco --prompt 'docker kill> ' | awk '{print \$1}' | xargs docker rm"
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
@@ -97,10 +108,6 @@ if [ "$TERM" = "screen" ]; then
 
   chpwd
 fi
-
-function precmd() {
-    #$HOME/bin/precmd.pl `history -n -1 | head -1`
-}
 
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:descriptions' format '%B%d%b'
