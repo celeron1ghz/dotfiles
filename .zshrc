@@ -49,9 +49,16 @@ alias ppr='clear; carton exec prove'
 alias ppl='clear; carton exec perl -Ilib'
 alias sv="supervisorctl"
 
-alias dl="docker ps --format='{{ .ID }} {{ .Names }} (from {{ .Image }})' | peco --prompt 'docker logs> ' | awk '{print \$1}' | xargs docker logs"
-alias dk="docker ps --format='{{ .ID }} {{ .Names }} (from {{ .Image }})' | peco --prompt 'docker kill> ' | awk '{print \$1}' | xargs docker kill"
-alias dr="docker ps --format='{{ .ID }} {{ .Names }} (from {{ .Image }})' | peco --prompt 'docker kill> ' | awk '{print \$1}' | xargs docker rm"
+function fmtc() {
+    xargs docker inspect \
+        --format='{{ printf "[%s]" .State.Status | printf "%-10s" }} {{ printf "%-25s" .Name }} image:{{ printf "%-25s" .Config.Image }} host:{{ printf "%-16s" .Config.Hostname }} {{ printf "%-80s" .Id }} '
+}
+
+alias dl="docker ps -qa                           | fmtc | peco --prompt 'docker logs> '        | awk '{print \$5}' | xargs docker logs"
+alias dk="docker ps -q --filter='status=running'  | fmtc | peco --prompt 'docker kill> '        | awk '{print \$5}' | xargs docker kill"
+alias dkr="docker ps -q --filter='status=running' | fmtc | peco --prompt 'docker kill and rm> ' | awk '{print \$5}' | xargs docker kill && xargs docker rm"
+alias dr="docker ps -qa                           | fmtc | peco --prompt 'docker rm> '          | awk '{print \$5}' | xargs docker rm"
+alias de="docker exec -it \`docker ps -qa         | fmtc | peco --prompt 'docker exec> '        | awk '{print \$5}'\`  sh"
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
