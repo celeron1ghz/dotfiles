@@ -23,6 +23,9 @@ export LANG=ja_JP.UTF-8
 export EDITOR=/usr/bin/vi
 export PAGER=/usr/bin/less
 
+export GOPATH=$HOME
+export PATH=$PATH:$GOPATH/bin
+
 case "${OSTYPE}" in
   darwin*)
     alias ls="ls -G"

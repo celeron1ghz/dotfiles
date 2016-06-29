@@ -1,0 +1,9 @@
+[user]
+	email = celeron1ghz@gmail.com
+	name = celeron1ghz
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
+[ghq]
+    root = ~/src
