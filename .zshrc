@@ -1,30 +1,42 @@
-autoload -U colors;   colors
-autoload -U compinit; compinit -u
-
-bindkey -e emacs
-
-DEF="$reset_color"
+## variables
 PROMPT="
-%{$fg[green]%}%/%{$DEF%} on %{$fg[cyan]%}%M%{$DEF%}
-%{$fg[yellow]%}%n%{$DEF%} %# "
+%{$fg[green]%}%/%{$reset_color%} on %{$fg[cyan]%}%M%{$reset_color%}
+%{$fg[yellow]%}%n%{$reset_color%} %# "
+
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
-source ~/perl5/perlbrew/etc/bashrc
-source ~/dotfiles/zsh_command/open_pm_with_vim.zsh
-source ~/dotfiles/zsh_command/peco_select_history.zsh
-source /usr/local/share/zsh/site-functions/_aws
-eval "$(direnv hook zsh)"
-direnv allow
+export PATH=$PATH:$HOME/dotfiles/bin:$GOPATH/bin
+export GOPATH=$HOME
 
-export PATH=$PATH:$HOME/dotfiles/bin
 export LANG=ja_JP.UTF-8
 export EDITOR=/usr/bin/vi
 export PAGER=/usr/bin/less
 
-export GOPATH=$HOME
-export PATH=$PATH:$GOPATH/bin
+
+## zsh options, parameters
+autoload -U colors;   colors
+autoload -U compinit; compinit -u
+
+setopt auto_cd
+setopt correct
+setopt list_packed
+setopt prompt_subst
+setopt share_history 
+
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name ''
+
+alias q='exit'
+alias cls='clear'
+alias gd='git diff'
+alias gs='git status'
+alias gl='git log'
 
 case "${OSTYPE}" in
   darwin*)
@@ -39,42 +51,33 @@ case "${OSTYPE}" in
     ;;
 esac
 
-alias q='exit'
-alias cls='clear'
-alias gd='git diff'
-alias gs='git status'
+bindkey -e emacs
 
-alias di='docker images'
-alias dp='docker ps -a'
-alias dl='docker logs'
 
-alias ppr='clear; carton exec prove'
-alias ppl='clear; carton exec perl -Ilib'
-alias sv="supervisorctl"
+## source files
+source ~/perl5/perlbrew/etc/bashrc
+source ~/dotfiles/zsh_command/open_pm_with_vim.zsh
+source ~/dotfiles/zsh_command/peco_select_history.zsh
+source /usr/local/share/zsh/site-functions/_aws
 
-function fmtc() {
-    xargs docker inspect \
-        --format='{{ printf "[%s]" .State.Status | printf "%-10s" }} {{ printf "%-25s" .Name }} image:{{ printf "%-25s" .Config.Image }} host:{{ printf "%-16s" .Config.Hostname }} {{ printf "%-80s" .Id }} '
+
+## others
+eval "$(direnv hook zsh)"
+direnv allow
+
+
+# Ctrl + ] => ghq
+function peco-src () {
+  local selected_dir=$(ghq list -p | peco --prompt "REPOSITORY >" --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
 }
+zle -N peco-src
+bindkey '' peco-src
 
-alias dl="docker ps -qa                           | fmtc | peco --prompt 'docker logs> '        | awk '{print \$5}' | xargs docker logs"
-alias dk="docker ps -q --filter='status=running'  | fmtc | peco --prompt 'docker kill> '        | awk '{print \$5}' | xargs docker kill"
-alias dkr="docker ps -q --filter='status=running' | fmtc | peco --prompt 'docker kill and rm> ' | awk '{print \$5}' | xargs docker kill && xargs docker rm"
-alias dr="docker ps -qa                           | fmtc | peco --prompt 'docker rm> '          | awk '{print \$5}' | xargs docker rm"
-alias de="docker exec -it \`docker ps -qa         | fmtc | peco --prompt 'docker exec> '        | awk '{print \$5}'\`  sh"
-
-PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-
-#if [ -f ~/.ssh/id_dsa -a "$TERM" != "screen" ]; then
-#	keychain ~/.ssh/id_dsa
-#	source ~/.keychain/$HOST-sh
-#fi
-
-setopt auto_cd
-setopt correct
-setopt list_packed
-setopt prompt_subst
-setopt share_history 
 
 if [ "$TERM" = "screen" ]; then
   chpwd() { echo -n "_`dirs`\\" }
@@ -118,9 +121,3 @@ if [ "$TERM" = "screen" ]; then
 
   chpwd
 fi
-
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*' group-name ''
