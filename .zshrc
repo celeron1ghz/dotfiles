@@ -1,6 +1,7 @@
 ## variables
 autoload -U colors;   colors
 autoload -U compinit; compinit -u
+set rtp+=~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/
 
 PROMPT="
 %{$fg[green]%}%/%{$reset_color%} on %{$fg[cyan]%}%M%{$reset_color%}
@@ -11,7 +12,7 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
-export PATH=$PATH:$HOME/dotfiles/bin:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:~/Library/Python/3.6/bin
 export GOPATH=$HOME
 
 export LANG=ja_JP.UTF-8
@@ -37,6 +38,7 @@ alias cls='clear'
 alias gd='git diff'
 alias gs='git status'
 alias gl='git log'
+alias vim='mvim -v'
 
 case "${OSTYPE}" in
   darwin*)
@@ -59,6 +61,7 @@ source ~/perl5/perlbrew/etc/bashrc
 source ~/dotfiles/zsh_command/open_pm_with_vim.zsh
 source ~/dotfiles/zsh_command/peco_select_history.zsh
 source /usr/local/share/zsh/site-functions/_aws
+source ~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 
 
 ## others

@@ -1,3 +1,8 @@
+" Powerline setting
+set laststatus=2
+set showtabline=2
+set rtp+=~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/
+
 noremap <silent> ,s :VimShell<cr>
 noremap <silent>  :Unite buffer<cr>
 noremap <silent>  :Unite file file_mru <cr>
