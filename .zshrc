@@ -1,4 +1,7 @@
 ## variables
+autoload -U colors;   colors
+autoload -U compinit; compinit -u
+
 PROMPT="
 %{$fg[green]%}%/%{$reset_color%} on %{$fg[cyan]%}%M%{$reset_color%}
 %{$fg[yellow]%}%n%{$reset_color%} %# "
@@ -17,9 +20,6 @@ export PAGER=/usr/bin/less
 
 
 ## zsh options, parameters
-autoload -U colors;   colors
-autoload -U compinit; compinit -u
-
 setopt auto_cd
 setopt correct
 setopt list_packed

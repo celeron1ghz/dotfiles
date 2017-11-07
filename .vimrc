@@ -1,52 +1,48 @@
-" config from http://qiita.com/Cside_/items/3d186671b361672f1e51
-syntax on
-
-" plugin settings
-filetype plugin on
-
-set rtp+=~/.vim/vundle/
-call vundle#rc('~/.vim/bundle')
-
-Bundle 'petdance/vim-perl'
-Bundle 'hotchpotch/perldoc-vim'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
-Bundle 'thinca/vim-quickrun'
-
-" plugin settings
-let g:acp_enableAtStartup = 0
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-
-"let g:neocomplcache_ctags_arguments_list = {
-"  \ 'perl' : '-R -h ".pm"'
-"  \ }
-
-let g:neocomplcache_snippets_dir = "~/.vim/snippets"
-
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default'    : '',
-    \ 'perl'       : $HOME . '/.vim/dict/perl.dict'
-    \ }
-
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
+if &compatible
+  set nocompatible
 endif
 
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-if g:neocomplcache_enable_at_startup
-  imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_jump_or_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" install dein from github if not exist
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
+
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+if dein#check_install()
+  call dein#install()
+endif
+
+" plugin settings
+"Bundle 'petdance/vim-perl'
+"Bundle 'hotchpotch/perldoc-vim'
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neosnippet'
+"Bundle 'Shougo/neosnippet-snippets'
+"Bundle 'thinca/vim-quickrun'
+"Bundle 'tpope/vim-surround'
 
 " editor setting
+syntax on
+
 set number
 set hlsearch
 set nobackup
@@ -67,16 +63,7 @@ ab du use YAML; warn YAML::Dump
 
 map ,p :set nonumber paste<enter>
 map ,P :set number   nopaste<enter>
-
-let g:changelog_dateformat = "%Y-%m-%d"
-let g:changelog_username = "celeron1ghz"
-let s:envrc = $HOME . '/.vim/' . system('uname -n | tr -d "\n"') . '.vimrc'
-
-if filereadable(s:envrc)
-	"echo s:envrc
-	execute "source " . s:envrc
-endif
-
+map ,t :!clear; carton exec perl -Ilib %<enter>
 
 if has("syntax")
     syntax on
@@ -98,37 +85,10 @@ if has("syntax")
     augroup END
 endif
 
-
-if has('win32')
-    if has("gui_running")
-        let &guifont = iconv('Osaka－等幅:h9:cSHIFTJIS', &encoding, 'cp932')
-    endif
-endif
-
 if has("gui_running")
     set clipboard+=unnamed
     colorscheme darkblue
 endif
 
-
-map <silent> <C-p> :bNext<cr>
-map <silent> <C-n> :bnext<cr>
-map <silent> ,l    :ls<cr>
-
-autocmd FileType yaml map <F5> :!plagger -c % 2>&1 <Enter>
-autocmd FileType yaml map <F6> :!plagger -c % 2>&1 \| less -r <Enter>
-autocmd FileType perl map <F5> :!source ~/.zshrc; perl -Ilib % 2>&1 <Enter>
-autocmd FileType perl map <F6> :!source ~/.zshrc; perl -Ilib % 2>&1 \| less -r <Enter>
-autocmd FileType perl map <F7> :!source ~/.zshrc; perl -Ilib -c %<Enter>
-autocmd FileType changelog runtime ftplugin/changelog.vim
-autocmd FileType python map <F5> :!python %<Enter>
-
+"autocmd FileType perl map <F5> :!source ~/.zshrc; perl -Ilib % 2>&1 <Enter>
 autocmd BufNewFile,BufRead *.t            :set filetype=perl
-autocmd BufNewFile,BufRead *.psgi         :set filetype=perl
-autocmd BufNewFile,BufRead *.tt           :set filetype=html
-autocmd BufNewFile,BufRead *.tx           :set filetype=html
-autocmd BufNewFile,BufRead *.ep           :set filetype=html
-autocmd BufNewFile,BufRead *.epl          :set filetype=html
-autocmd BufNewFile,BufRead *.cgi          :set filetype=perl
-autocmd BufNewFile,BufRead *.crontab      :set filetype=crontab
-autocmd BufNewFile,BufRead *.vimperatorrc :set filetype=vim
