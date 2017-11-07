@@ -1,3 +1,8 @@
+noremap <silent> ,s :VimShell<cr>
+noremap <silent>  :Unite buffer<cr>
+noremap <silent>  :Unite file file_mru <cr>
+noremap <silent>  :VimFiler -split -simple -winwidth=25 -no-quit<cr>
+
 if &compatible
   set nocompatible
 endif
@@ -31,17 +36,14 @@ if dein#check_install()
   call dein#install()
 endif
 
-let g:quickrun_config = {}
+let g:quickrun_config={
+\   "_" : {
+\       "runner" : "vimproc",
+\       "outputter/buffer/split" : ":botright 8",
+\   },
+\   '*': {'split': ''}
+\ }
 let g:quickrun_config.perl = {'command' : 'perl', 'cmdopt': '-MProject::Libs' }
-
-" plugin settings
-"Bundle 'petdance/vim-perl'
-"Bundle 'hotchpotch/perldoc-vim'
-"Bundle 'Shougo/neocomplcache'
-"Bundle 'Shougo/neosnippet'
-"Bundle 'Shougo/neosnippet-snippets'
-"Bundle 'thinca/vim-quickrun'
-"Bundle 'tpope/vim-surround'
 
 " editor setting
 syntax on
