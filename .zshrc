@@ -59,7 +59,7 @@ bindkey -e emacs
 
 ## source files
 source ~/perl5/perlbrew/etc/bashrc
-source ~/dotfiles/zsh_command/open_pm_with_vim.zsh
+source ~/dotfiles/zsh_command/peco_ghq_src.zsh
 source ~/dotfiles/zsh_command/peco_select_history.zsh
 source /usr/local/share/zsh/site-functions/_aws
 source ~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
@@ -69,18 +69,6 @@ source ~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powe
 eval "$(direnv hook zsh)"
 direnv allow
 
-
-# Ctrl + ] => ghq
-function peco-src () {
-  local selected_dir=$(ghq list -p | peco --prompt "REPOSITORY >" --query "$LBUFFER")
-  if [ -n "$selected_dir" ]; then
-    BUFFER="cd ${selected_dir}"
-    zle accept-line
-  fi
-  zle clear-screen
-}
-zle -N peco-src
-bindkey '' peco-src
 
 
 if [ "$TERM" = "screen" ]; then
