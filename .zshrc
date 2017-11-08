@@ -1,27 +1,27 @@
-## old normal shell setting, powerline setting these
-#autoload -U colors;   colors
-#PROMPT="
-#%{$fg[green]%}%/%{$reset_color%} on %{$fg[cyan]%}%M%{$reset_color%}
-#%{$fg[yellow]%}%n%{$reset_color%} %# "
-#PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-
 ## variables
+autoload -U colors;   colors
+autoload -U compinit; compinit -u
+set rtp+=~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/
+
+PROMPT="
+%{$fg[green]%}%/%{$reset_color%} on %{$fg[cyan]%}%M%{$reset_color%}
+%{$fg[yellow]%}%n%{$reset_color%} %# "
+
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
-export PATH="$PATH:$GOPATH/bin:~/Library/Python/3.6/bin"
-export GOPATH="$HOME"
-export LANG="ja_JP.UTF-8"
-export EDITOR="/usr/bin/vi"
-export PAGER="/usr/bin/less"
+export PATH=$PATH:$GOPATH/bin:~/Library/Python/3.6/bin
+export GOPATH=$HOME
+
+export LANG=ja_JP.UTF-8
+export EDITOR=/usr/bin/vi
+export PAGER=/usr/bin/less
 export TERM="xterm-256color"
 
-set rtp+=~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/
 
 ## zsh options, parameters
-autoload -U compinit; compinit -u
-
 setopt auto_cd
 setopt correct
 setopt list_packed
@@ -34,7 +34,6 @@ zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*' group-name ''
 
-## aliases
 alias q='exit'
 alias cls='clear'
 alias gd='git diff'
@@ -55,16 +54,34 @@ case "${OSTYPE}" in
     ;;
 esac
 
+bindkey -e emacs
+
+
 ## source files
 source ~/perl5/perlbrew/etc/bashrc
-source ~/dotfiles/zsh_command/*
+source ~/dotfiles/zsh_command/open_pm_with_vim.zsh
+source ~/dotfiles/zsh_command/peco_select_history.zsh
 source /usr/local/share/zsh/site-functions/_aws
 source ~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 
+
 ## others
-bindkey -e emacs
 eval "$(direnv hook zsh)"
 direnv allow
+
+
+# Ctrl + ] => ghq
+function peco-src () {
+  local selected_dir=$(ghq list -p | peco --prompt "REPOSITORY >" --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+bindkey '' peco-src
+
 
 if [ "$TERM" = "screen" ]; then
   chpwd() { echo -n "_`dirs`\\" }
