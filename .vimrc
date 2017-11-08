@@ -5,7 +5,7 @@ set rtp+=~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/
 
 noremap <silent> ,s :VimShell<cr>
 noremap <silent>  :Unite buffer<cr>
-noremap <silent>  :Unite file file_mru <cr>
+noremap <silent>  :Unite -start-insert file_rec/git<cr>
 noremap <silent>  :VimFiler -split -simple -winwidth=25 -no-quit<cr>
 
 if &compatible
@@ -41,6 +41,8 @@ if dein#check_install()
   call dein#install()
 endif
 
+
+" dein managed plugin setting
 let g:quickrun_config={
 \   "_" : {
 \       "runner" : "vimproc",
@@ -48,7 +50,11 @@ let g:quickrun_config={
 \   },
 \   '*': {'split': ''}
 \ }
+
 let g:quickrun_config.perl = {'command' : 'perl', 'cmdopt': '-MProject::Libs' }
+
+call unite#custom_source('file_rec/git', 'ignore_pattern', 'local/\|node_modules/\|\.git/')
+
 
 " editor setting
 syntax on
