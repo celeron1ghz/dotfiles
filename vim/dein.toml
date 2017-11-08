@@ -35,3 +35,6 @@ repo = 'Shougo/neocomplete.vim'
 [[plugins]]
 repo = 'Lokaltog/powerline'
 rtp = 'powerline/bindings/vim'
+
+[[plugins]]
+repo = 'kmnk/vim-unite-giti'

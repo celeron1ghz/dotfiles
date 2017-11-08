@@ -7,6 +7,8 @@ noremap <silent> ,s :VimShell<cr>
 noremap <silent>  :Unite buffer<cr>
 noremap <silent>  :Unite -start-insert file_rec/git<cr>
 noremap <silent>  :VimFiler -split -simple -winwidth=25 -no-quit<cr>
+noremap <silent>gs :Unite giti/status<cr>
+noremap <silent>gl :Unite giti/log<cr>
 
 if &compatible
   set nocompatible
