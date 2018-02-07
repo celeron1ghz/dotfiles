@@ -12,3 +12,6 @@ zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*' group-name ''
+
+source ~/dotfiles/zsh_command/peco_ghq_src.zsh
+source ~/dotfiles/zsh_command/peco_select_history.zsh

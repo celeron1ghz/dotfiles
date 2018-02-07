@@ -1,5 +1,7 @@
 ## init
 bindkey -e emacs
+
+
 eval "$(direnv hook zsh)"
 direnv allow
 
@@ -19,18 +21,7 @@ SAVEHIST=100000
 export PATH=$PATH:$GOPATH/bin:~/Library/Python/3.6/bin
 
 source ~/dotfiles/rc/general_env.sh
-
-set rtp+=~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/
-source ~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
-
-## source files
-source ~/dotfiles/zsh_command/peco_ghq_src.zsh
-source ~/dotfiles/zsh_command/peco_select_history.zsh
-
-source ~/perl5/perlbrew/etc/bashrc
-source /usr/local/share/zsh/site-functions/_aws
-
-
+source ~/dotfiles/rc/commands.sh
 source ~/dotfiles/rc/aliases.sh
 source ~/dotfiles/rc/zsh_settings.sh
 
