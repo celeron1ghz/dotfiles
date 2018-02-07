@@ -25,29 +25,6 @@ export TERM="xterm-256color"
 
 set rtp+=~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/
 
-
-## aliases
-alias q='exit'
-alias cls='clear'
-alias gd='git diff'
-alias gs='git status'
-alias gl='git log'
-alias vim='mvim -v'
-
-case "${OSTYPE}" in
-  darwin*)
-    alias ls="ls -G"
-    alias ll="ls -lG"
-    alias la="ls -laG"
-    ;;
-  linux*)
-    alias ls='ls --color'
-    alias ll='ls -l --color'
-    alias la='ls -la --color'
-    ;;
-esac
-
-
 ## source files
 autoload -U colors;   colors
 autoload -U compinit; compinit -u
@@ -58,6 +35,7 @@ source ~/dotfiles/zsh_command/peco_select_history.zsh
 source /usr/local/share/zsh/site-functions/_aws
 source ~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 
+source ~/dotfiles/rc/aliases.sh
 
 ## zsh options, parameters
 setopt auto_cd
