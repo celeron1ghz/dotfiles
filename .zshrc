@@ -17,6 +17,7 @@ HISTSIZE=100000
 SAVEHIST=100000
 
 export PATH=$PATH:$GOPATH/bin:~/Library/Python/3.6/bin
+
 export GOPATH=$HOME
 export LANG=ja_JP.UTF-8
 export EDITOR=/usr/bin/vi
@@ -24,31 +25,18 @@ export PAGER=/usr/bin/less
 export TERM="xterm-256color"
 
 set rtp+=~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/
-
-## source files
-autoload -U colors;   colors
-autoload -U compinit; compinit -u
-
-source ~/perl5/perlbrew/etc/bashrc
-source ~/dotfiles/zsh_command/peco_ghq_src.zsh
-source ~/dotfiles/zsh_command/peco_select_history.zsh
-source /usr/local/share/zsh/site-functions/_aws
 source ~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 
+## source files
+source ~/dotfiles/zsh_command/peco_ghq_src.zsh
+source ~/dotfiles/zsh_command/peco_select_history.zsh
+
+source ~/perl5/perlbrew/etc/bashrc
+source /usr/local/share/zsh/site-functions/_aws
+
+
 source ~/dotfiles/rc/aliases.sh
-
-## zsh options, parameters
-setopt auto_cd
-setopt correct
-setopt list_packed
-setopt prompt_subst
-setopt share_history 
-
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*' group-name ''
+source ~/dotfiles/rc/zsh_settings.sh
 
 
 ## functions
