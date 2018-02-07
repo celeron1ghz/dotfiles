@@ -18,11 +18,7 @@ SAVEHIST=100000
 
 export PATH=$PATH:$GOPATH/bin:~/Library/Python/3.6/bin
 
-export GOPATH=$HOME
-export LANG=ja_JP.UTF-8
-export EDITOR=/usr/bin/vi
-export PAGER=/usr/bin/less
-export TERM="xterm-256color"
+source ~/dotfiles/rc/general_env.sh
 
 set rtp+=~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/vim/
 source ~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
