@@ -1,5 +1,4 @@
 alias q='exit'
-alias cls='clear'
 alias gd='git diff'
 alias gs='git status'
 alias gl='git log'
