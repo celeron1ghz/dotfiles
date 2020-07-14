@@ -28,15 +28,30 @@ export PATH="$PATH:$HOME/go/bin"
 ## python
 ##
 if [ `which pipenv` != "" ]; then
-  cd $HOME/dotfiles/py
-  POWERLINE_BIN=`pipenv --venv`
+  CACHE=path
 
-  if [ "$POWERLINE_BIN" != "" ];
+  cd $HOME/dotfiles/py
+
+  if [ -e $CACHE ];
     then
-      export PATH="$PATH:$POWERLINE_BIN/bin"
-      BINDING="$POWERLINE_BIN/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh"
-      source $BINDING
+      ## read cache value
+      POWERLINE_ROOT=`cat $CACHE`
     else
-      pipenv install powerline-status
+      ## create cache
+      POWERLINE_ROOT=`pipenv --venv`
+      echo $POWERLINE_ROOT > $CACHE
   fi
+
+  ## read powerline config
+  if [ "$POWERLINE_ROOT" = "" ]; then
+    pipenv install powerline-status
+    POWERLINE_ROOT=`pipenv --venv`
+    echo $POWERLINE_ROOT > $CACHE
+  fi
+
+  export PATH="$PATH:$POWERLINE_ROOT/bin"
+  BINDING="$POWERLINE_ROOT/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh"
+  source $BINDING
+
+  cd $HOME
 fi
