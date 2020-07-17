@@ -14,10 +14,15 @@ fi
 ##
 ## perl
 ##
-if [ -e ~/perl5/perlbrew/etc/bashrc ]; then
-  echo "perlbrew config loading..."
-  source ~/perl5/perlbrew/etc/bashrc
+PLENV_DIR=$HOME/.plenv
+export PATH="$PATH:$PLENV_DIR/bin"
+
+if [ "`command -v plenv`" = "" ]; then
+  git clone https://github.com/tokuhirom/plenv.git $PLENV_DIR
+  git clone https://github.com/tokuhirom/Perl-Build.git $PLENV_DIR/plugins/perl-build/
 fi
+
+eval "$(plenv init -)"
 
 ##
 ## golang
@@ -27,7 +32,7 @@ export PATH="$PATH:$HOME/go/bin"
 ##
 ## python
 ##
-if [ `which pipenv` != "" ]; then
+if [ "`command -v pipenv`" != "" ]; then
   CACHE=path
 
   cd $HOME/dotfiles/py
