@@ -5,7 +5,7 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
-if [ `which direnv` != "" ]; then
+if [ "`command -v direnv`" != "" ]; then
   echo "direnv init..."
   eval "$(direnv hook zsh)"
   direnv allow
