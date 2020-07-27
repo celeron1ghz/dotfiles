@@ -10,7 +10,7 @@
 
     - name: apt install
       apt:
-        name: [zsh, php7.3, apache2, php-xdebug]
+        name: [zsh, pipenv, php7.3, apache2, php-xdebug]
       become: yes
 
     ## apache setting
@@ -40,7 +40,7 @@
     ## php config
     - name: xdebug config
       template:
-        src:  20-xdebug.ini
+        src:  xdebug.ini
         dest: /etc/php/7.3/mods-available/
       become: yes
 
