@@ -1,6 +1,8 @@
 project_dir: project_dir
 project: project_name
-php_dir: "{{ ansible_env.HOME }}/clients/{{ project_dir }}/public_html/"
+project_root: "{{ ansible_env.HOME }}/clients/{{ project_dir }}"
+php_dir: "{{ project_root }}/public_html/{{ project }}"
+lib_dir: "{{ project_root }}/php_conf/{{ project }}"
 pg_database: moge_db
 pg_username: moge
 pg_password: moge

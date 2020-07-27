@@ -89,3 +89,10 @@
         login_user: postgres
       become: yes
       become_user: postgres
+
+    ## database provisioner
+    - name: database provision script
+      template:
+        src:  provision.sh
+        dest: "{{ ansible_env.HOME }}"
+        mode: 0755
