@@ -1,0 +1,56 @@
+- hosts: localhost
+  vars:
+    php_dir: "{{ ansible_env.HOME }}/php/"
+  tasks:
+    ## apt
+    - name: apt repo
+      apt_repository:
+        repo: ppa:ondrej/php
+      become: yes
+
+    - name: apt install
+      apt:
+        name: [zsh, php7.3, apache2, php-xdebug]
+      become: yes
+
+    ## apache setting
+    - name: enable apache2
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+      become: yes
+
+    - name: enable apache2 ssl
+      apache2_module:
+        name: ssl
+        state: present
+      become: yes
+
+    - name: apache config
+      template:
+        src:  site.conf
+        dest: /etc/apache2/sites-available/
+      become: yes
+
+    - name: enable site.conf
+      shell: a2ensite site.conf
+      become: yes
+
+    ## php config
+    - name: xdebug config
+      template:
+        src:  20-xdebug.ini
+        dest: /etc/php/7.3/mods-available/
+      become: yes
+
+    - name: enable xdebug
+      shell: phpenmod xdebug
+      become: yes
+
+    ## reload
+    - name: restart httpd
+      service:
+        name: apache2
+        state: restarted
+      become: yes
