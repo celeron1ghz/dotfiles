@@ -24,3 +24,4 @@ chsh -s /usr/bin/zsh
  * Install `PHP Debug`
  * Click `create a launch.json file` link and select `PHP` and just save
  * Invoke debugger from debbuger tab
+ * Access to https://localhost (https. not http)

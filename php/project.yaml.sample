@@ -1,0 +1,6 @@
+project_dir: project_dir
+project: project_name
+php_dir: "{{ ansible_env.HOME }}/clients/{{ project_dir }}/public_html/"
+pg_database: moge_db
+pg_username: moge
+pg_password: moge
