@@ -1,4 +1,3 @@
-
 DATA1={{ lib_dir }}/{{ project }}/sql/master_data.txt
 DATA2={{ lib_dir }}/{{ project }}/sql/master_data2.txt
 DDL={{ lib_dir }}/{{ project }}/sql/createtable_posgresql.sql

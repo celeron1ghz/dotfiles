@@ -10,7 +10,19 @@
 
     - name: apt install
       apt:
-        name: [zsh, direnv, pipenv, php7.3, php7.3-pgsql, php7.3-mbstring, postgresql, python3-psycopg2, apache2, php-xdebug]
+        name:
+          [
+            zsh,
+            direnv,
+            pipenv,
+            php7.3,
+            php7.3-pgsql,
+            php7.3-mbstring,
+            postgresql,
+            python3-psycopg2,
+            apache2,
+            php-xdebug,
+          ]
       become: yes
 
     ## apache setting
@@ -29,7 +41,7 @@
 
     - name: apache config
       template:
-        src:  site.conf
+        src: site.conf
         dest: /etc/apache2/sites-available/
       become: yes
 
@@ -40,7 +52,7 @@
     ## php config
     - name: xdebug config
       template:
-        src:  xdebug.ini
+        src: xdebug.ini
         dest: /etc/php/7.3/mods-available/
       become: yes
 
@@ -58,7 +70,7 @@
     ## postgres setup
     - name: config pg_hba.conf
       template:
-        src:  pg_hba.conf
+        src: pg_hba.conf
         dest: /etc/postgresql/12/main/
       become: yes
       become_user: postgres
@@ -70,22 +82,22 @@
         enabled: true
       become: yes
 
-    - name : create database
+    - name: create database
       postgresql_db:
-        name:       "{{ pg_database }}"
-        encoding:   "UTF-8"
-        template:   template0
-        state:      present
+        name: "{{ pg_database }}"
+        encoding: "UTF-8"
+        template: template0
+        state: present
       become: yes
       become_user: postgres
 
     - name: create user
       postgresql_user:
-        db:       "{{ pg_database }}"
-        name:     "{{ pg_username }}"
+        db: "{{ pg_database }}"
+        name: "{{ pg_username }}"
         password: "{{ pg_password }}"
-        priv:     ALL
-        state:    present
+        priv: ALL
+        state: present
         login_user: postgres
       become: yes
       become_user: postgres
@@ -93,6 +105,11 @@
     ## database provisioner
     - name: database provision script
       template:
-        src:  provision.sh
+        src: dbinit.sh
+        dest: "{{ ansible_env.HOME }}"
+        mode: 0755
+    - name: start script
+      template:
+        src: start.sh
         dest: "{{ ansible_env.HOME }}"
         mode: 0755
