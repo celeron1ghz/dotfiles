@@ -114,3 +114,8 @@
         src: start.sh
         dest: "{{ ansible_env.HOME }}"
         mode: 0755
+    - name: serial loader
+      template:
+        src: serial.sh
+        dest: "{{ ansible_env.HOME }}"
+        mode: 0755
