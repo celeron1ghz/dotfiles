@@ -1,4 +1,4 @@
-DATA={{ lib_dir }}/{{ project }}/sql/serial_sql.txt
+DATA={{ lib_dir }}/{{ project }}/sql/serial_sql.sql
 
 echo "data: $DATA"
 
