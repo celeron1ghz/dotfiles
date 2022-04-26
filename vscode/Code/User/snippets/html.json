@@ -1,0 +1,32 @@
+{
+	"var_dump": {
+		"prefix": "ddd",
+		"body": [
+			"<?= var_dump($1) ?>",
+		]
+	},
+	"php single": {
+		"prefix": "<<",
+		"body": [
+			"<?= $1 ?>",
+		]
+	},
+	"php if": {
+		"prefix": "if",
+		"body": [
+			"<?php if ($1) : ?>",
+			"  $2",
+			"<?php else : ?>",
+			"  $3",
+			"<?php endif ?>",
+		]
+	},
+	"php foreach": {
+		"prefix": "foreach",
+		"body": [
+			"<?php foreach (\\$${1:array} as \\$${2:key} => \\$${3:val}) : ?>",
+			"  <?= \\$$2 ?> <?= \\$$3 ?>",
+			"<?php endforeach ?>",
+		]
+	}
+}

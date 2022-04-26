@@ -1,0 +1,129 @@
+{
+    "editor.minimap.enabled": false,
+    "editor.letterSpacing": -0.5,
+    "editor.lineHeight": 17,
+
+    "explorer.openEditors.visible": 0,
+
+    "window.menuBarVisibility": "toggle",
+
+    "outline.showVariables": false,
+
+    "workbench.activityBar.visible": false,
+    "workbench.colorTheme": "Dark Github",
+    "workbench.iconTheme": "material-icon-theme",
+
+    "debug.allowBreakpointsEverywhere": true,
+
+    "remote.SSH.path": "C:\\Program Files\\Git\\usr\\bin\\",
+    "terminal.external.windowsExec": "C:\\Windows\\System32\\bash.exe",
+
+    "highlight.decorations": {
+        "rangeBehavior": 3
+    },
+
+    "highlight.regexFlags": "gi",
+    "highlight.regexes": {
+        "(var_dump\\(.+\\))": [
+
+            {
+                "color": "#000000",
+                "backgroundColor": "#FFFF00",
+            }
+        ],
+        "(print_r\\(.+?\\))": [
+            {
+                "color": "#FFFFFF",
+                "backgroundColor": "#666600",
+            }
+        ],
+        "(error_log)": [
+            {
+                "backgroundColor": "#990000",
+            }
+        ],
+        "(\\$rslt\\['tmpl'\\]\\s=\\s.+);": [
+            {
+                "borderStyle": "solid",
+                "borderColor": "#009999",
+                "borderWidth": "0 0 2px 0",
+            }
+        ],
+        "(View::location\\(.+?\\));": [
+            {
+                "borderStyle": "solid",
+                "borderColor": "#009900",
+                "borderWidth": "0 0 2px 0",
+            }
+        ],
+        "(ErrorMsg::\\$\\w+)": [
+            {
+                "borderStyle": "solid",
+                "borderColor": "#FF00FF",
+                "borderWidth": "0 0 2px 0",
+            }
+        ],
+        "(<\\?php.+?\\?>)": [
+            {
+                "borderStyle": "solid",
+                "borderColor": "#FF00FF",
+                "borderWidth": "0 0 1px 0",
+            }
+        ],
+        "(<\\?=.+?\\?>)": [
+            {
+                "borderStyle": "solid",
+                "borderColor": "#FFFF00",
+                "borderWidth": "0 0 1px 0",
+            }
+        ],
+    },
+
+    "workbench.colorCustomizations": {
+        "editor.findMatchBorder": "#FF00FF",
+        "editor.findMatchBackground": "#990099",
+        "editor.findMatchHighlightBorder": "#FFFF00",
+        "editor.findMatchHighlightBackground": "#888800"
+    },
+
+    "files.associations": {
+        "*.inc": "php",
+        "*.tmpl": "html"
+    },
+
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+
+    "html.format.endWithNewline": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.contentUnformatted": "pre, code, textarea, title, h1, h2, h3, h4, h5, h6, p",
+    "html.format.extraLiners": "",
+    "html.format.unformatted": null,
+    "html.format.wrapLineLength": 200,
+
+    "[perl]": {
+        "editor.defaultFormatter": "zhiyuan-lin.simple-perl",
+        "editor.formatOnSaveMode": "modifications",
+        "editor.formatOnSave": true,
+    },
+    "[php]": {
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+
+    "php.executablePath": "/usr/bin/php7.4",
+    "phpcs.enable": true,
+    "phpcs.showSources": true,
+    "phpcs.standard": "PSR2",
+    "phpcs.executablePath": "/home/nose/.config/composer/vendor/bin/phpcs",
+    "json.schemas": [],
+    "security.workspace.trust.untrustedFiles": "open",
+}

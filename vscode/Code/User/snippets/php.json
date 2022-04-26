@@ -1,0 +1,36 @@
+{
+	"ed": {
+		"prefix": "ed",
+		"body": [
+			"error_log(sprintf('!!!!!DUMP!!!!! at %s L%s ==> ', basename(__FILE__), __LINE__) . print_r(${1:val}, true));",
+		]
+	},
+	"txn": {
+		"prefix": "txn",
+		"body": [
+			"\\$result = new DBResult(false, null);",
+			"",
+			"if (!\\$this->DB->Transaction(\\$key)) {",
+			"    \\$result->setResult(false, 'transaction start failed');",
+			"    return \\$result;",
+			"}",
+			"",
+			"\\$r = ${1:method()}; // your process here...",
+			"",
+			"if (!\\$r->result) {",
+			"    \\$this->DB->Rollback(\\$key);",
+			"    \\$result->setResult(false, 'error');",
+			"    return \\$result;",
+			"}",
+			"",
+			"if (\\$this->DB->Commit(\\$key)) {",
+			"    \\$result->setResult(true, \\$r->response);",
+			"    return \\$result;",
+			"} else {",
+			"    \\$this->DB->Rollback(\\$key);",
+			"    \\$result->setResult(false, 'transaction rollback failed');",
+			"    return \\$result;",
+			"}",
+		]
+	}
+}

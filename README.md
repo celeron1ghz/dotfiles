@@ -19,3 +19,7 @@ clone後shellを再起動すれば各種セットアップが始まる。
 
 環境個別の設定は `rc/local.sh` に書くこと。
 
+## VSCode
+VSCodeの設定は以下に置くこと。
+
+ * C:\Users\youusername\AppData\Roaming\Code\User
