@@ -8,7 +8,6 @@ case "${OSTYPE}" in
     alias ls="ls -G"
     alias ll="ls -lG"
     alias la="ls -laG"
-    alias vim='mvim -v'
     ;;
   linux*)
     alias ls='ls --color'
