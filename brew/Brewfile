@@ -1,9 +1,15 @@
-brew 'lima';
-brew 'direnv';
-brew 'peco';
-brew 'pipenv';
+tap "sanemat/font"
+
+brew "awscli";
+brew "direnv";
+brew "ghq";
+brew "lima";
+brew "peco";
+brew "pipenv";
+brew "sanemat/font/ricty", args: ["with-powerline"]
 
 cask "google-chrome";
+cask "visual-studio-code"
 
 mas "1Password", id: 443987910;
 mas "1Password for Safari", id: 1569813296;
