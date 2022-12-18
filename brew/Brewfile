@@ -1,0 +1,12 @@
+brew 'lima';
+brew 'direnv';
+brew 'peco';
+brew 'pipenv';
+
+cask "google-chrome";
+
+mas "1Password", id: 443987910;
+mas "1Password for Safari", id: 1569813296;
+mas "Slack for Desktop", id: 803453959;
+mas "MenuBar Stats", id: 714196447;
+

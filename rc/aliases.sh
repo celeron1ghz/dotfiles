@@ -16,5 +16,3 @@ case "${OSTYPE}" in
     alias la='ls -la --color'
     ;;
 esac
-
-alias e="sudo tail -f /var/log/apache2/error.log"
