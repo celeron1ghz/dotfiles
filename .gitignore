@@ -1,2 +1,5 @@
 rc/local.sh
+bin/*
+.vscode/
 Brewfile.lock.json
+*.swp

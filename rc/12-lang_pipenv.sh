@@ -24,7 +24,7 @@ if [ "`command -v pipenv`" != "" ]; then
   fi
 
   export PATH="$PATH:$POWERLINE_ROOT/bin"
-  BINDING="$POWERLINE_ROOT/lib/python3.9/site-packages/powerline/bindings/zsh/powerline.zsh"
+  BINDING="$POWERLINE_ROOT/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh"
   source $BINDING
 
   cd $HOME
