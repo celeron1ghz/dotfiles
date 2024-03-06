@@ -3,3 +3,4 @@ bin/*
 .vscode/
 Brewfile.lock.json
 *.swp
+99-ssh-agent.sh
