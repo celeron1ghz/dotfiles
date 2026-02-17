@@ -1,0 +1,16 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """$character"""
+right_format = """$all"""
+
+[time]
+disabled = false
+
+[perl]
+format = '[$symbol$version]($style) '
+
+[php]
+format = '[$symbol$version]($style) '
+
+[nodejs]
+format = '[$symbol$version]($style) '
