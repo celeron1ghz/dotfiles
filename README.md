@@ -19,3 +19,9 @@ clone後shellを再起動すれば各種セットアップが始まる。
 
 環境個別の設定は `rc/local.sh` に書くこと。
 
+## BrewでMacのアプリを自動インストール
+```
+cd dotfiles
+brew bundle
+```
+
