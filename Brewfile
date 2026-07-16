@@ -8,3 +8,6 @@ cask "1password"
 cask "visual-studio-code"
 cask "slack"
 cask "menubar-stats"
+cask "discord"
+
+mas 'LINE', id: 539883307
