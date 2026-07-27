@@ -4,3 +4,4 @@ bin/*
 Brewfile.lock.json
 *.swp
 99-ssh-agent.sh
+gitconfig/work
